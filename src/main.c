@@ -3,10 +3,12 @@
 #include <string.h>
 
 #include "xor.h"
+#include "md5.h"
 
 int main(int argc, char *argv[]) {
-  if (argc != 5) {
-    printf("Usage: %s <action> <method> <message> <key>\n", argv[0]);
+  if (argc != 5 && !(argc == 4 && strcmp(argv[1], "hash") == 0)) {
+    printf("Usage: %s <action> <method> <message> [key]\n", argv[0]);
+    printf("Note: key is only required for encryption/decryption\n");
     return 1;
   }
   const char *action = argv[1];
@@ -20,6 +22,13 @@ int main(int argc, char *argv[]) {
       result = xor_encrypt(message, key);
     } else if (strcmp(action, "decrypt") == 0) {
       result = xor_decrypt(message, key);
+    } else {
+      printf("Unsupported action: %s\n", action);
+      return 1;
+    }
+  } else if (strcmp(method, "md5") == 0) {
+    if (strcmp(action, "hash") == 0) {
+      result = md5_hash(message);
     } else {
       printf("Unsupported action: %s\n", action);
       return 1;
