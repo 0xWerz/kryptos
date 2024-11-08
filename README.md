@@ -24,7 +24,7 @@ Kryptos is a personal project and progress control to learn about cryptography.
 - [ ] SHA-1
 - [ ] SHA-2
 - [ ] SHA-3
-- [ ] MD5
+- [x] MD5
 - [ ]
 
 # Usage
